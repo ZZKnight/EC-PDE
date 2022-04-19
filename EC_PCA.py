@@ -1,0 +1,55 @@
+from sklearn.decomposition import PCA
+from scipy.stats import zscore
+import matplotlib.pyplot as plt
+from scipy.io import savemat
+import numpy as np
+A = np.load('Data/PDE2D_EC_N50.npy')
+pca = PCA()
+X = pca.fit_transform(np.nan_to_num(zscore(A)))
+data={'pcaA':X}
+fig = plt.figure(figsize=(8, 6), dpi=80)
+ax = plt.subplot(111)
+ax.scatter(X[0:384,0],X[0:384,1],90,marker = 'o', label = "$PDE1$",facecolor = 'r',edgecolor = 'k')
+ax.scatter(X[384:384*2,0],X[384:384*2,1],90,marker = 'o', label = "$PDE2$",facecolor = 'b',edgecolor = 'k')
+ax.scatter(X[384*2:384*3,0],X[384*2:384*3,1],90,marker = 'o', label = "$PDE3$",facecolor = 'g',edgecolor = 'k')
+ax.scatter(X[384*3:384*4,0],X[384*3:384*4,1],90,marker = 'o', label = "$PDE4$",facecolor = 'm',edgecolor = 'k')
+ax.scatter(X[384*4:384*5,0],X[384*4:384*5,1],90,marker = 'o', label = "$PDE5$",facecolor = 'c',edgecolor = 'k')
+ax.scatter(X[384*5:384*6,0],X[384*5:384*6,1],90,marker = 'o', label = "$PDE6$",facecolor = 'y',edgecolor = 'k')
+plt.xlabel('Principal Component 1')
+plt.ylabel('Principal Component 2')
+plt.tight_layout()
+plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+plt.savefig('PDE2D_EC_pcaN50.png',transparent = True)
+savemat("PDE2D_EC_N50_PCA.mat", data)
+
+# A = np.load('B1_EC_N50.npy')
+# pca = PCA()
+# X = pca.fit_transform(np.nan_to_num(zscore(A)))
+# data={'pcaA':X}
+# fig = plt.figure(figsize=(8, 6), dpi=80)
+# ax = plt.subplot(111)
+# ax.scatter(X[0:100,0],X[0:100,1],90,marker = 'o', label = "$D>0,R>0$",facecolor = 'r',edgecolor = 'k')
+# ax.scatter(X[100:200,0],X[100:200,1],90,marker = 'o', label = "$D=0,R>0$",facecolor = 'b',edgecolor = 'k')
+# ax.scatter(X[200:300,0],X[200:300,1],90,marker = 'o', label = "$D>0,R=0$",facecolor = 'g',edgecolor = 'k')
+# plt.xlabel('Principal Component 1')
+# plt.ylabel('Principal Component 2')
+# plt.tight_layout()
+# plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+# plt.savefig('B1_EC_pcaN50.png',transparent = True)
+# savemat("B1_EC_N50_PCA.mat", data)
+
+# A = np.load('RD_EC_N50.npy')
+# pca = PCA()
+# X = pca.fit_transform(np.nan_to_num(zscore(A)))
+# data={'pcaA':X}
+# fig = plt.figure(figsize=(8, 6), dpi=80)
+# ax = plt.subplot(111)
+# ax.scatter(X[0:100,0],X[0:100,1],90,marker = 'o', label = "$D>0,R>0$",facecolor = 'r',edgecolor = 'k')
+# ax.scatter(X[100:200,0],X[100:200,1],90,marker = 'o', label = "$D=0,R>0$",facecolor = 'b',edgecolor = 'k')
+# ax.scatter(X[200:300,0],X[200:300,1],90,marker = 'o', label = "$D>0,R=0$",facecolor = 'g',edgecolor = 'k')
+# plt.xlabel('Principal Component 1')
+# plt.ylabel('Principal Component 2')
+# plt.tight_layout()
+# plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+# plt.savefig('RD_EC_pcaN50.png',transparent = True)
+# savemat("RD_EC_N50_PCA.mat", data)
